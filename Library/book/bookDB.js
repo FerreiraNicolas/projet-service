@@ -1,33 +1,35 @@
-const Sequelize = require('sequelize');
-const { DataTypes } = require('sequelize');
+const Sequelize = require("sequelize");
+const { DataTypes } = require("sequelize");
 
-const sequelize = new Sequelize('projet', 'dev', 'azerty', {
-  host: 'localhost',
-  dialect: 'mysql' 
+const sequelize = new Sequelize("projet", "dev", "azerty", {
+  host: "localhost",
+  dialect: "mysql",
 });
 
-const Book = sequelize.define('Book', {
+const Book = sequelize.define(
+  "Book",
+  {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
     title: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
     },
     author_id: {
       type: Sequelize.INTEGER,
-      allowNull: false
+      allowNull: false,
     },
     category_id: {
       type: Sequelize.INTEGER,
-      allowNull: false
-    }
+      allowNull: false,
+    },
+  },
+  {
+    tableName: "book",
   }
-    , {
-    tableName: 'book'
-    }
-  );
-  
-  module.exports = Book;
+);
+
+module.exports = Book;
