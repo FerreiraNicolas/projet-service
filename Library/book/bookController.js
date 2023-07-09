@@ -1,50 +1,9 @@
 const bookService = require('./bookService');
 
+
+
 const getAllBooks = (req, res) => {
-    const books = bookService.getAllBooks();
-    res.json(books);
-};
-
-const getBookById = (req, res) => {
-    const id = parseInt(req.params.id);
-    const book = bookService.getBookById(id);
-
-    if (book) {
-        res.json(book);
-    } else {
-        res.status(404).json({error: 'Book not found'});
-    }
-};
-
-const addBook = (req, res) => {
-    const newAuthor = bookService.addBook(req.body);
-    res.status(201).json(newAuthor);
-};
-
-const updateBook = (req, res) => {
-    const id = parseInt(req.params.id);
-    const updatedAuthor = authorService.updateBook(id, req.body);
-
-    if (updatedAuthor) {
-        res.json(updatedAuthor);
-    } else {
-        res.status(404).json({error: 'Author not found'});
-    }
-};
-
-const deleteBook = (req, res) => {
-    const id = parseInt(req.params.id);
-    const deletedAuthor = authorService.deleteBook(id);
-
-    if (deletedAuthor) {
-        res.json(deletedAuthor);
-    } else {
-        res.status(404).json({error: 'Author not found'});
-    }
-};
-
-const getAllBooksDB = (req, res) => {
-    bookService.getAllBooksDB()
+    bookService.getAllBooks()
       .then(books => {
         res.json(books);
       })
@@ -54,9 +13,9 @@ const getAllBooksDB = (req, res) => {
       });
   };
   
-  const getBookByIdDB = (req, res) => {
+  const getBookById = (req, res) => {
     const id = req.params.id;
-    bookService.getBookByIdDB(id)
+    bookService.getBookById(id)
       .then(book => {
         if (book) {
           res.json(book);
@@ -70,8 +29,8 @@ const getAllBooksDB = (req, res) => {
       });
   };  
   
-  const createBookDB = (req, res) => {
-    bookService.createBookDB(req.body)
+  const createBook = (req, res) => {
+    bookService.createBook(req.body)
       .then(book => {
         res.status(201).json(book);
       })
@@ -81,9 +40,9 @@ const getAllBooksDB = (req, res) => {
       });
   };
   
-  const updateBookDB = (req, res) => {
+  const updateBook = (req, res) => {
     const id = req.params.id;
-    bookService.updateBookDB(id, req.body)
+    bookService.updateBook(id, req.body)
       .then(updatedRows => {
         if (updatedRows > 0) {
           res.json({ message: 'Book updated' });
@@ -97,9 +56,9 @@ const getAllBooksDB = (req, res) => {
       });
   };  
   
-  const deleteBookDB = (req, res) => {
+  const deleteBook = (req, res) => {
     const id = req.params.id;
-    bookService.deleteBookDB(id)
+    bookService.deleteBook(id)
       .then(deletedRows => {
         if (deletedRows > 0) {
           res.status(200).json({ message: 'Book deleted' });
@@ -113,19 +72,37 @@ const getAllBooksDB = (req, res) => {
       });
   };
   
+  const deleteBooksByAuthorId = (req, res) => {
+    const author_id = req.params.author_id;
+    bookService.deleteBooksByAuthorId(author_id)
+      .then(() => {
+        res.json({ message: 'Books deleted successfully' });
+      })
+      .catch(err => {
+        console.error('Error deleting books by author ID:', err);
+        res.status(500).json({ error: 'Error deleting books by author ID' });
+      });
+  };
+  const deleteBooksByCategoryId = (req, res) => {
+    const category_id = req.params.category_id;
+    bookService.deleteBooksByCategoryId(category_id)
+      .then(() => {
+        res.json({ message: 'Books deleted successfully' });
+      })
+      .catch(err => {
+        console.error('Error deleting books by category ID:', err);
+        res.status(500).json({ error: 'Error deleting books by category ID' });
+      });
+  };
 
+  
 
 module.exports = {
     getAllBooks,
     getBookById,
-    addBook,
+    createBook,
     updateBook,
     deleteBook,
-    getAllBooksDB,
-    getBookByIdDB,
-    createBookDB,
-    updateBookDB,
-    deleteBookDB
-    
-
+    deleteBooksByAuthorId,
+    deleteBooksByCategoryId
 };

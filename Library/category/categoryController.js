@@ -2,22 +2,6 @@ const axios = require('axios');
 
 const categoryService = require('./categoryService');
 
-const getAllCategories = (req, res) => {
-    const categories = categoryService.getAllCategories();
-    res.json(categories);
-};
-
-const getCategoryById = (req, res) => {
-    const id = parseInt(req.params.id);
-    const category = categoryService.getCategoryById(id);
-
-    if (category) {
-        res.json(category);
-    } else {
-        res.status(404).json({error: 'Category not found'});
-    }
-};
-
 const getCategoryAndAuthor = async (req, res) => {
     const id = parseInt(req.params.id);
     const category = categoryService.getCategoryById(id);
@@ -39,37 +23,8 @@ const getCategoryAndAuthor = async (req, res) => {
     }
 };
 
-// Ajoutez ces contrôleurs à votre contrôleur de catégorie
-const addCategory = (req, res) => {
-    const newCategory = categoryService.addCategory(req.body);
-    res.status(201).json(newCategory);
-};
-
-const updateCategory = (req, res) => {
-    const id = parseInt(req.params.id);
-    const updatedCategory = categoryService.updateCategory(id, req.body);
-
-    if (updatedCategory) {
-        res.json(updatedCategory);
-    } else {
-        res.status(404).json({error: 'Category not found'});
-    }
-};
-
-const deleteCategory = (req, res) => {
-    const id = parseInt(req.params.id);
-    const deletedCategory = categoryService.deleteCategory(id);
-
-    if (deletedCategory) {
-        res.json(deletedCategory);
-    } else {
-        res.status(404).json({error: 'Category not found'});
-    }
-};
-
-
-const getAllCategoriesBDD = (req, res) => {
-    categoryService.getAllCategoriesBDD()
+const getAllCategories = (req, res) => {
+    categoryService.getAllCategories()
       .then(categories => {
         res.json(categories);
       })
@@ -79,9 +34,9 @@ const getAllCategoriesBDD = (req, res) => {
       });
   };
   
-  const getCategoryByIdBDD = (req, res) => {
+  const getCategoryById = (req, res) => {
     const id = req.params.id;
-    categoryService.getCategoryByIdBDD(id)
+    categoryService.getCategoryById(id)
       .then(category => {
         if (category) {
           res.json(category);
@@ -95,8 +50,8 @@ const getAllCategoriesBDD = (req, res) => {
       });
   };  
   
-  const createCategoryBDD = (req, res) => {
-    categoryService.createCategoryBDD(req.body)
+  const createCategory = (req, res) => {
+    categoryService.createCategory(req.body)
       .then(category => {
         res.status(201).json(category);
       })
@@ -106,9 +61,9 @@ const getAllCategoriesBDD = (req, res) => {
       });
   };
   
-  const updateCategoryBDD = (req, res) => {
+  const updateCategory = (req, res) => {
     const id = req.params.id;
-    categoryService.updateCategoryBDD(id, req.body)
+    categoryService.updateCategory(id, req.body)
       .then(updatedRows => {
         if (updatedRows > 0) {
           res.json({ message: 'Category updated' });
@@ -122,9 +77,9 @@ const getAllCategoriesBDD = (req, res) => {
       });
   };  
   
-  const deleteCategoryBDD = (req, res) => {
+  const deleteCategory = (req, res) => {
     const id = req.params.id;
-    categoryService.deleteCategoryBDD(id)
+    categoryService.deleteCategory(id)
       .then(deletedRows => {
         if (deletedRows > 0) {
           res.status(200).json({ message: 'Category deleted' });
@@ -142,16 +97,11 @@ const getAllCategoriesBDD = (req, res) => {
 
 
 module.exports = {
+    getCategoryAndAuthor,
     getAllCategories,
     getCategoryById,
-    addCategory,
+    createCategory,
     updateCategory,
-    deleteCategory,
-    getCategoryAndAuthor,
-    getAllCategoriesBDD,
-    getCategoryByIdBDD,
-    createCategoryBDD,
-    updateCategoryBDD,
-    deleteCategoryBDD
+    deleteCategory
     
 };
