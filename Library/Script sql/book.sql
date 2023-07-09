@@ -44,9 +44,12 @@ CREATE TABLE IF NOT EXISTS `book` (
 -- Déchargement des données de la table `book`
 --
 
-INSERT INTO `book` (`id`, `title`, `author_id`, `category_id`, `createdAt`, `updatedAt`) VALUES
-(1, 'Harry Potter and the Sorcerer\'s Stone', 1, 1, '2023-07-08 13:47:18', '2023-07-08 13:47:18'),
-(2, 'It', 2, 2, '2023-07-08 13:47:18', '2023-07-08 13:47:18');
+INSERT INTO `book` (`title`, `author_id`, `category_id`) VALUES
+('The Hobbit', 1, 1),
+('The Lord of the Rings', 1, 1),
+('The Hunger Games', 2, 2),
+('The Notebook', 3, 3);
+
 
 --
 -- Contraintes pour les tables déchargées

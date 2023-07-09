@@ -40,10 +40,11 @@ CREATE TABLE IF NOT EXISTS `author` (
 -- Déchargement des données de la table `author`
 --
 
-INSERT INTO `author` (`id`, `name`, `createdAt`, `updatedAt`) VALUES
-(1, 'J.K. Rowling', '2023-07-08 13:45:39', '2023-07-08 13:45:39'),
-(2, 'Stephen King', '2023-07-08 13:45:39', '2023-07-08 13:45:39'),
-(4, 'Test', '2023-07-08 12:00:53', '2023-07-08 12:00:53');
+INSERT INTO `author` (`name`) VALUES
+('J.K. Rowling'),
+('J.R.R. Tolkien'),
+('Jane Austen'),
+('F. Scott Fitzgerald');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

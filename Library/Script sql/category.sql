@@ -40,10 +40,12 @@ CREATE TABLE IF NOT EXISTS `category` (
 -- Déchargement des données de la table `category`
 --
 
-INSERT INTO `category` (`id`, `title`, `createdAt`, `updatedAt`) VALUES
-(1, 'Fantasy', '2023-07-08 13:46:32', '2023-07-08 13:46:32'),
-(2, 'Horror', '2023-07-08 13:46:32', '2023-07-08 13:46:32'),
-(3, 'Test', '2023-07-08 13:46:32', '2023-07-08 12:25:00');
+INSERT INTO `category` ( `title`) VALUES
+('Fantasy'),
+('Adventure'),
+('Romance'),
+('Classics'),
+('Drama');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
