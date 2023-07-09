@@ -8,24 +8,27 @@ const getAllAuthors = () => {
   const getAuthorById = (id) => {
     return Author.findByPk(id); 
   };
-  
 const addAuthor = (newAuthor) => {
     return Author.create(newAuthor);
 };
 const deleteAuthor = (author_id) => {
-    // Replace 'http://localhost:3000' with the URL of your books service
-    return axios.delete(`http://localhost:3003/books/author/${author_id}`)
-      .then(() => {
-        return Author.destroy({ where: { id: author_id } });
-      });
-  };
-  
-
+  return axios.delete(`http://localhost:3003/books/author/${author_id}`)
+    .then(() => {
+      return Author.destroy({ where: { id: author_id } });
+    })
+    .catch(err => {
+      console.error('Error deleting books for author:', err);
+    });
+};
+const updateAuthor = (id, updatedAuthor) => {
+    return Author.update(updatedAuthor, { where: { id } });
+};
 
 module.exports = {
 
     getAllAuthors,
     getAuthorById,
     addAuthor,
-    deleteAuthor
+    deleteAuthor,
+    updateAuthor
 };

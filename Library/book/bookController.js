@@ -72,17 +72,17 @@ const getAllBooks = (req, res) => {
       });
   };
   
-  const deleteBooksByAuthorId = (req, res) => {
-    const author_id = req.params.author_id;
-    bookService.deleteBooksByAuthorId(author_id)
-      .then(() => {
-        res.json({ message: 'Books deleted successfully' });
-      })
-      .catch(err => {
-        console.error('Error deleting books by author ID:', err);
-        res.status(500).json({ error: 'Error deleting books by author ID' });
-      });
-  };
+const deleteBooksByAuthorId = (req, res) => {
+  const author_id = req.params.author_id;
+  bookService.deleteBooksByAuthorId(author_id)
+    .then(() => {
+      res.json({ message: 'Books deleted successfully' });
+    })
+    .catch(err => {
+      console.error('Error deleting books by author ID:', err);
+      res.status(500).json({ error: 'Error deleting books by author ID' });
+    });
+};
   const deleteBooksByCategoryId = (req, res) => {
     const category_id = req.params.category_id;
     bookService.deleteBooksByCategoryId(category_id)

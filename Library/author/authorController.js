@@ -1,8 +1,6 @@
 const authorService = require('./authorService');
 const Author = require('./authorDB.js');
 
-
-
 const getAllAuthors = (req, res) => {
     Author.findAll()
       .then((authors) => {
@@ -42,26 +40,22 @@ const addAuthor = (req, res) => {
         });
 };
 
-
-//   const updateAuthorBDD = (req, res) => {
-//     const id = req.params.id;
-//     authorService.updateAuthorBDD(id, req.body)
-//       .then(updatedRows => {
-//         if (updatedRows > 0) {
-//           res.json({ message: 'Author updated' });
-//         } else {
-//           res.status(404).json({ error: 'Author not found' });
-//         }
-//       })
-//       .catch(err => {
-//         console.error('Error updating author:', err);
-//         res.status(500).json({ error: 'Error updating author' });
-//       });
-//   };
+const updateAuthor = (req, res) => {
+  const id = req.params.id;
+  const updatedAuthor = req.body;
+  authorService.updateAuthor(id, updatedAuthor)
+    .then(author => {
+      res.json({ message: 'Author updated successfully' });
+    })
+    .catch(err => {
+      console.error('Error updating author:', err);
+      res.status(500).json({ error: 'Error updating author' });
+    });
+};
 
 const deleteAuthor = (req, res) => {
   const author_id = req.params.author_id;
-  authorService.deleteAuthorAndBooksBDD(author_id)
+  authorService.deleteAuthor(author_id)
     .then(() => {
       res.json({ message: 'Author and associated books deleted successfully' });
     })
@@ -70,14 +64,10 @@ const deleteAuthor = (req, res) => {
       res.status(500).json({ error: 'Error deleting author and associated books' });
     });
 };
-
-
 module.exports = {
     getAllAuthors,
     getAuthorById,
     addAuthor,
     deleteAuthor,
-    // updateAuthorBDD
-
-
+    updateAuthor
 };

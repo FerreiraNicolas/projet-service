@@ -11,7 +11,7 @@ const getAllCategories = () => {
     return Category.findByPk(id);
   };
   
-  const addCategory = (category) => {
+  const createCategory = (category) => {
     return Category.create(category);
   };
   
@@ -30,7 +30,7 @@ const getAllCategories = () => {
 module.exports = {
     getAllCategories,
     getCategoryById,
-    addCategory,
+    createCategory,
     updateCategory,
     deleteCategory,
 };

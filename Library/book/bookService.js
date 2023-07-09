@@ -1,7 +1,6 @@
 const Book = require('./bookDB');
 const axios = require('axios');
 
-
 const getAllBooks = () => {
   return Book.findAll()
     .then(books => {
@@ -19,8 +18,6 @@ const getAllBooks = () => {
       }));
     });
 };
-
-
 const getBookById = (id) => {
   return Book.findByPk(id)
     .then(book => {
@@ -37,12 +34,9 @@ const getBookById = (id) => {
     });
 };
 
-
-
-  
-  const createBook = (book) => {
+const createBook = (book) => {
     return Book.create(book);
-  };
+};
   
   const updateBook = (id, updatedBook) => {
     return Book.update(updatedBook, { where: { id } }); 
