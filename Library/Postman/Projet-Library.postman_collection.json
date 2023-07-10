@@ -50,7 +50,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": ""
 										}
 									]
 								}
@@ -104,7 +104,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "5"
+											"value": ""
 										}
 									]
 								}
@@ -118,7 +118,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\" : \"Book Writerr\"\r\n}",
+									"raw": "{\r\n    \"name\" : \"Book Writer\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -126,7 +126,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3002/authors/9",
+									"raw": "http://localhost:3002/authors/:id",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -134,7 +134,13 @@
 									"port": "3002",
 									"path": [
 										"authors",
-										"9"
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
 									]
 								}
 							},
@@ -183,7 +189,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "24"
+											"value": ""
 										}
 									]
 								}
@@ -197,7 +203,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"title\":\"Le Book\",\r\n    \"author_id\":\"6\",\r\n    \"category_id\":\"7\"\r\n}",
+									"raw": "{\r\n    \"title\":\"Le Book\"\r\n    // ,\"author_id\":\"5\",\r\n    // ,\"category_id\":\"4\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -225,7 +231,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"title\":\"Bilbo\"\r\n}",
+									"raw": "{\r\n    \"title\":\"Bilbo\"\r\n    //,\"author_id\":3,\r\n    //,\"category_id\":2\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -246,7 +252,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "24"
+											"value": ""
 										}
 									]
 								}
@@ -273,7 +279,7 @@
 									"variable": [
 										{
 											"key": "category_id",
-											"value": "7"
+											"value": ""
 										}
 									]
 								}
@@ -300,7 +306,33 @@
 									"variable": [
 										{
 											"key": "author_id",
-											"value": "6"
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Books",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3003/books/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3003",
+									"path": [
+										"books",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
 										}
 									]
 								}
@@ -350,7 +382,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "7"
+											"value": ""
 										}
 									]
 								}
@@ -361,7 +393,28 @@
 							"name": "Add Category",
 							"request": {
 								"method": "POST",
-								"header": []
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Arcade\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/categories/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"categories",
+										""
+									]
+								}
 							},
 							"response": []
 						},
@@ -393,7 +446,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "10"
+											"value": ""
 										}
 									]
 								}
@@ -419,7 +472,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "10"
+											"value": ""
 										}
 									]
 								}
