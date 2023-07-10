@@ -59,13 +59,13 @@ const deleteAuthor = (req, res) => {
   authorService
     .deleteAuthor(author_id)
     .then(() => {
-      res.json({ message: "Author and associated books deleted successfully" });
+      res.json({ message: "Author and possible associated books deleted successfully" });
     })
     .catch((err) => {
-      console.error("Error deleting author and associated books:", err);
+      console.error("Error deleting author and possible associated books:", err);
       res
         .status(500)
-        .json({ error: "Error deleting author and associated books" });
+        .json({ error: "Error deleting author and possible associated books" });
     });
 };
 module.exports = {
