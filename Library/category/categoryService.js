@@ -25,11 +25,18 @@ const deleteCategory = (category_id) => {
     });
 };
 const incrementCategoryWeight = (id) => {
-  try {
-    return Category.increment('weight', { where: { id: id } }); 
-  } catch (err) {
-    console.error('Error incrementing category weight:', err);  
-  }
+  return Category.findByPk(id)
+    .then(category => {
+      if (category) {
+        return Category.increment('weight', { where: { id: id } });
+      } else {
+        throw new Error('Category not found');
+      }
+    })
+    .catch(err => {
+      console.error('Error incrementing category weight:', err);
+      throw err;
+    });
 };
 
 

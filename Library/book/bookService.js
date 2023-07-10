@@ -62,14 +62,27 @@ const deleteBook = (id) => {
 };
 
 const deleteBooksByAuthorId = (author_id) => {
-  return Book.destroy({
-    where: { author_id },
-  });
+  return Book.count({ where: { author_id } })
+    .then(count => {
+      if (count > 0) {
+        return Book.destroy({ where: { author_id } });
+      } else {
+        console.log('No books found for author');
+        return 0;  // Return 0 to indicate no books were deleted
+      }
+    });
 };
+
 const deleteBooksByCategoryId = (category_id) => {
-  return Book.destroy({
-    where: { category_id },
-  });
+  return Book.count({ where: { category_id } })
+    .then(count => {
+      if (count > 0) {
+        return Book.destroy({ where: { category_id } });
+      } else {
+        console.log('No books found for category');
+        return 0;  // Return 0 to indicate no books were deleted
+      }
+    });
 };
 
 const searchBooks = (query) => {

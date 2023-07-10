@@ -78,16 +78,21 @@ const deleteCategory = (req, res) => {
 };
 const incrementCategoryWeight = (req, res) => {
   console.log('Request parameters:', req.params);
-  const id = req.params.id; // Changed from category_id to id
+  const id = req.params.id;
   categoryService.incrementCategoryWeight(id)
     .then(() => {
-      res.sendStatus(200);
+      res.status(200).json({ message: 'Category weight incremented successfully' });
     })
     .catch(err => {
-      console.error('Error incrementing category weight:', err);
-      res.status(500).json({ error: 'Error incrementing category weight' });
+      if (err.message === 'Category not found') {
+        res.status(404).json({ error: 'Category not found' });
+      } else {
+        console.error('Error incrementing category weight:', err);
+        res.status(500).json({ error: 'Error incrementing category weight' });
+      }
     });
 };
+
 
 
 module.exports = {

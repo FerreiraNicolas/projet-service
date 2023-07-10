@@ -79,26 +79,36 @@ const deleteBooksByAuthorId = (req, res) => {
   const author_id = req.params.author_id;
   bookService
     .deleteBooksByAuthorId(author_id)
-    .then(() => {
-      res.json({ message: "Books deleted successfully" });
+    .then(numDeleted => {
+      if (numDeleted > 0) {
+        res.json({ message: "Books deleted successfully" });
+      } else {
+        res.json({ message: "No books found for author" });
+      }
     })
     .catch((err) => {
       console.error("Error deleting books by author ID:", err);
       res.status(500).json({ error: "Error deleting books by author ID" });
     });
 };
+
 const deleteBooksByCategoryId = (req, res) => {
   const category_id = req.params.category_id;
   bookService
     .deleteBooksByCategoryId(category_id)
-    .then(() => {
-      res.json({ message: "Books deleted successfully" });
+    .then(numDeleted => {
+      if (numDeleted > 0) {
+        res.json({ message: "Books deleted successfully" });
+      } else {
+        res.json({ message: "No books found for category" });
+      }
     })
     .catch((err) => {
       console.error("Error deleting books by category ID:", err);
       res.status(500).json({ error: "Error deleting books by category ID" });
     });
 };
+
 
 const searchBooks = (req, res) => {
   const query = req.query.query;
