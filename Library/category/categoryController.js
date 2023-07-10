@@ -2,29 +2,6 @@ const axios = require("axios");
 
 const categoryService = require("./categoryService");
 
-const getCategoryAndAuthor = async (req, res) => {
-  const id = parseInt(req.params.id);
-  const category = categoryService.getCategoryById(id);
-
-  if (category) {
-    try {
-      const response = await axios.get(
-        `http://localhost:3002/authors/${category.authorId}`
-      );
-      const author = response.data;
-
-      res.json({
-        ...category,
-        author,
-      });
-    } catch (error) {
-      res.status(500).json({ error: "Error getting author" });
-    }
-  } else {
-    res.status(404).json({ error: "Category not found" });
-  }
-};
-
 const getAllCategories = (req, res) => {
   categoryService
     .getAllCategories()
@@ -101,7 +78,6 @@ const deleteCategory = (req, res) => {
 };
 
 module.exports = {
-  getCategoryAndAuthor,
   getAllCategories,
   getCategoryById,
   createCategory,
