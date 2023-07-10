@@ -18,6 +18,11 @@ const Category = sequelize.define(
       type: Sequelize.STRING,
       allowNull: false,
     },
+    weight: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
   },
   {
     tableName: "category",

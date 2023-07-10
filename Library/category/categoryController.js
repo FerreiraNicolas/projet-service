@@ -76,6 +76,19 @@ const deleteCategory = (req, res) => {
       res.status(500).json({ error: "Error deleting category" });
     });
 };
+const incrementCategoryWeight = (req, res) => {
+  console.log('Request parameters:', req.params);
+  const id = req.params.id; // Changed from category_id to id
+  categoryService.incrementCategoryWeight(id)
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch(err => {
+      console.error('Error incrementing category weight:', err);
+      res.status(500).json({ error: 'Error incrementing category weight' });
+    });
+};
+
 
 module.exports = {
   getAllCategories,
@@ -83,4 +96,5 @@ module.exports = {
   createCategory,
   updateCategory,
   deleteCategory,
+  incrementCategoryWeight
 };

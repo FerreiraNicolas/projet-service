@@ -31,6 +31,7 @@ DROP TABLE IF EXISTS `category`;
 CREATE TABLE IF NOT EXISTS `category` (
   `id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
+  `weight` int DEFAULT 0,
   `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
@@ -40,12 +41,12 @@ CREATE TABLE IF NOT EXISTS `category` (
 -- Déchargement des données de la table `category`
 --
 
-INSERT INTO `category` ( `title`) VALUES
-('Fantasy'),
-('Adventure'),
-('Romance'),
-('Classics'),
-('Drama');
+INSERT INTO `category` ( `title`, `weight`) VALUES
+('Fantasy', 0),
+('Adventure', 0),
+('Romance', 0),
+('Classics', 0),
+('Drama', 0);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

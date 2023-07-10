@@ -1,40 +1,87 @@
 const Book = require("./bookDB");
 const axios = require("axios");
+const { Sequelize, Op } = require('sequelize');
 
+
+// const getAllBooks = () => {
+//   return Book.findAll().then((books) => {
+//     return Promise.all(
+//       books.map((book) => {
+//         book = book.toJSON();
+//         return axios
+//           .get(`http://localhost:3002/authors/${book.author_id}`)
+//           .then((res) => {
+//             book.author = res.data;
+//             return axios.get(
+//               `http://localhost:3001/categories/${book.category_id}`
+//             );
+//           })
+//           .then((res) => {
+//             book.category = res.data;
+//             return book;
+//           });
+//       })
+//     );
+//   });
+// };
 const getAllBooks = () => {
-  return Book.findAll().then((books) => {
-    return Promise.all(
-      books.map((book) => {
-        book = book.toJSON();
-        return axios
-          .get(`http://localhost:3002/authors/${book.author_id}`)
-          .then((res) => {
-            book.author = res.data;
-            return axios.get(
-              `http://localhost:3001/categories/${book.category_id}`
-            );
-          })
-          .then((res) => {
+  let bookPromises = [];
+  
+  return Book.findAll().then(books => {
+    books.forEach(book => {
+      book = book.toJSON();
+      bookPromises.push(
+        axios.get(`http://localhost:3001/categories/${book.category_id}`)
+          .then(res => {
             book.category = res.data;
+            book.categoryWeight = res.data.weight;
+            return axios.get(`http://localhost:3002/authors/${book.author_id}`);  
+          })
+          .then(res => {
+            book.author = res.data;
             return book;
-          });
-      })
-    );
+          })
+      );
+    });
+    return Promise.all(bookPromises);
+  })
+  .then(books => {
+    books.sort((a, b) => {   
+      return b.categoryWeight - a.categoryWeight;  
+    });
+    return books;
   });
 };
+
+// const getBookById = (id) => {
+//   return Book.findByPk(id).then((book) => {
+//     book = book.toJSON();
+//     return axios
+//       .get(`http://localhost:3002/authors/${book.author_id}`)
+//       .then((res) => {
+//         book.author = res.data;
+//         return axios.get(
+//           `http://localhost:3001/categories/${book.category_id}`
+//         );
+//       })
+//       .then((res) => {
+//         book.category = res.data;
+//         return book;
+//       });
+//   });
+// };
+
 const getBookById = (id) => {
-  return Book.findByPk(id).then((book) => {
+  return Book.findByPk(id).then(book => {
     book = book.toJSON();
-    return axios
-      .get(`http://localhost:3002/authors/${book.author_id}`)
-      .then((res) => {
+    axios.post(`http://localhost:3001/categories/weight/${book.category_id}`);  // Increment weight first
+    return axios.get(`http://localhost:3002/authors/${book.author_id}`)
+      .then(res => {
         book.author = res.data;
-        return axios.get(
-          `http://localhost:3001/categories/${book.category_id}`
-        );
+        return axios.get(`http://localhost:3001/categories/${book.category_id}`); // Fetch updated category
       })
-      .then((res) => {
-        book.category = res.data;
+      .then(res => {
+        book.category = res.data; 
         return book;
       });
   });
@@ -63,6 +110,28 @@ const deleteBooksByCategoryId = (category_id) => {
   });
 };
 
+const searchBooks = (query) => {
+  return Book.findAll({ where: { title: { [Op.like]: `%${query}%` } } })
+    .then(books => {
+      if (books.length > 0) {
+        books.forEach(book => {
+          console.log(book.category_id);
+          axios.post(`http://localhost:3001/categories/weight/${book.category_id}`);
+          
+        });
+        return books;
+      } else {
+        throw new Error('No books found matching the provided query');
+      }
+    })
+    .catch(err => {
+      console.error('Error searching books:', err);
+      throw err;
+    });
+};
+
+
+
 module.exports = {
   getAllBooks,
   getBookById,
@@ -71,4 +140,5 @@ module.exports = {
   deleteBook,
   deleteBooksByAuthorId,
   deleteBooksByCategoryId,
+  searchBooks,
 };

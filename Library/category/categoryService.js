@@ -24,6 +24,15 @@ const deleteCategory = (category_id) => {
       return Category.destroy({ where: { id: category_id } });
     });
 };
+const incrementCategoryWeight = (id) => {
+  try {
+    return Category.increment('weight', { where: { id: id } }); 
+  } catch (err) {
+    console.error('Error incrementing category weight:', err);  // Added error handling
+  }
+};
+
+
 
 module.exports = {
   getAllCategories,
@@ -31,4 +40,5 @@ module.exports = {
   createCategory,
   updateCategory,
   deleteCategory,
+  incrementCategoryWeight
 };

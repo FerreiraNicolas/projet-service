@@ -9,5 +9,8 @@ router.delete("/books/:id", bookController.deleteBook);
 router.put("/books/:id", bookController.updateBook);
 router.delete("/books/author/:author_id", bookController.deleteBooksByAuthorId);
 router.delete("/books/category/:category_id", bookController.deleteBooksByCategoryId);
+router.get('/books/search/name', bookController.searchBooks);
+
+
 
 module.exports = router;

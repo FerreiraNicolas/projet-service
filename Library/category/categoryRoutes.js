@@ -8,4 +8,7 @@ router.post("/categories", categoryController.createCategory);
 router.put("/categories/:id", categoryController.updateCategory);
 router.delete("/categories/:id", categoryController.deleteCategory);
 
+router.post('/categories/weight/:id', categoryController.incrementCategoryWeight);
+
+
 module.exports = router;

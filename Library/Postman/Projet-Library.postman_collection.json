@@ -58,6 +58,41 @@
 							"response": []
 						},
 						{
+							"name": "Update Author",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"Book Writer\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3002/authors/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3002",
+									"path": [
+										"authors",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Create Author",
 							"request": {
 								"method": "POST",
@@ -90,41 +125,6 @@
 							"request": {
 								"method": "DELETE",
 								"header": [],
-								"url": {
-									"raw": "http://localhost:3002/authors/:id",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "3002",
-									"path": [
-										"authors",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": ""
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Update Author",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"name\" : \"Book Writer\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
 									"raw": "http://localhost:3002/authors/:id",
 									"protocol": "http",
@@ -197,6 +197,68 @@
 							"response": []
 						},
 						{
+							"name": "Search Books by Name",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3003/books/search/name?query=Hobbit",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3003",
+									"path": [
+										"books",
+										"search",
+										"name"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "Hobbit"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update A Book",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\":\"Bilbo\"\r\n    //,\"author_id\":3,\r\n    //,\"category_id\":2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3003/books/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3003",
+									"path": [
+										"books",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Create Book",
 							"request": {
 								"method": "POST",
@@ -225,19 +287,10 @@
 							"response": []
 						},
 						{
-							"name": "Update A Book",
+							"name": "Delete Books",
 							"request": {
-								"method": "PUT",
+								"method": "DELETE",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"title\":\"Bilbo\"\r\n    //,\"author_id\":3,\r\n    //,\"category_id\":2\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
 									"raw": "http://localhost:3003/books/:id",
 									"protocol": "http",
@@ -312,32 +365,6 @@
 								}
 							},
 							"response": []
-						},
-						{
-							"name": "Delete Books",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:3003/books/:id",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "3003",
-									"path": [
-										"books",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": ""
-										}
-									]
-								}
-							},
-							"response": []
 						}
 					]
 				},
@@ -390,35 +417,6 @@
 							"response": []
 						},
 						{
-							"name": "Add Category",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"Arcade\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:3001/categories/",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "3001",
-									"path": [
-										"categories",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Update Category",
 							"request": {
 								"method": "PUT",
@@ -448,6 +446,43 @@
 											"key": "id",
 											"value": ""
 										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Increment Category Weight",
+							"request": {
+								"method": "POST",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "Add Category",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Arcade\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/categories/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"categories",
+										""
 									]
 								}
 							},

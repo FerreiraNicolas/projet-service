@@ -100,6 +100,24 @@ const deleteBooksByCategoryId = (req, res) => {
     });
 };
 
+const searchBooks = (req, res) => {
+  const query = req.query.query;
+  bookService.searchBooks(query)
+    .then(books => {
+      if (books.length > 0) {
+        res.json(books);
+      } else {
+        res.status(404).json({ message: 'No books found matching the provided query' });
+      }
+    })
+    .catch(err => {
+      console.error('Error searching books:', err);
+      res.status(500).json({ error: 'Error searching books' });
+    });
+};
+
+
+
 module.exports = {
   getAllBooks,
   getBookById,
@@ -108,4 +126,5 @@ module.exports = {
   deleteBook,
   deleteBooksByAuthorId,
   deleteBooksByCategoryId,
+  searchBooks
 };
