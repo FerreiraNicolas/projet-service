@@ -1,5 +1,5 @@
 const Author = require("./authorDB.js");
-const axios = require("axios"); // Make sure to install axios if you haven't already
+const axios = require("axios");
 
 const getAllAuthors = () => {
   return Author.findAll();

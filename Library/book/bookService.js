@@ -3,27 +3,6 @@ const axios = require("axios");
 const { Sequelize, Op } = require('sequelize');
 
 
-// const getAllBooks = () => {
-//   return Book.findAll().then((books) => {
-//     return Promise.all(
-//       books.map((book) => {
-//         book = book.toJSON();
-//         return axios
-//           .get(`http://localhost:3002/authors/${book.author_id}`)
-//           .then((res) => {
-//             book.author = res.data;
-//             return axios.get(
-//               `http://localhost:3001/categories/${book.category_id}`
-//             );
-//           })
-//           .then((res) => {
-//             book.category = res.data;
-//             return book;
-//           });
-//       })
-//     );
-//   });
-// };
 const getAllBooks = () => {
   let bookPromises = [];
   
@@ -53,32 +32,15 @@ const getAllBooks = () => {
   });
 };
 
-// const getBookById = (id) => {
-//   return Book.findByPk(id).then((book) => {
-//     book = book.toJSON();
-//     return axios
-//       .get(`http://localhost:3002/authors/${book.author_id}`)
-//       .then((res) => {
-//         book.author = res.data;
-//         return axios.get(
-//           `http://localhost:3001/categories/${book.category_id}`
-//         );
-//       })
-//       .then((res) => {
-//         book.category = res.data;
-//         return book;
-//       });
-//   });
-// };
 
 const getBookById = (id) => {
   return Book.findByPk(id).then(book => {
     book = book.toJSON();
-    axios.post(`http://localhost:3001/categories/weight/${book.category_id}`);  // Increment weight first
+    axios.post(`http://localhost:3001/categories/weight/${book.category_id}`);
     return axios.get(`http://localhost:3002/authors/${book.author_id}`)
       .then(res => {
         book.author = res.data;
-        return axios.get(`http://localhost:3001/categories/${book.category_id}`); // Fetch updated category
+        return axios.get(`http://localhost:3001/categories/${book.category_id}`);
       })
       .then(res => {
         book.category = res.data; 
@@ -114,12 +76,21 @@ const searchBooks = (query) => {
   return Book.findAll({ where: { title: { [Op.like]: `%${query}%` } } })
     .then(books => {
       if (books.length > 0) {
-        books.forEach(book => {
-          console.log(book.category_id);
-          axios.post(`http://localhost:3001/categories/weight/${book.category_id}`);
-          
-        });
-        return books;
+        return Promise.all(
+          books.map(book => {
+            book = book.toJSON();
+            axios.post(`http://localhost:3001/categories/weight/${book.category_id}`); 
+            return axios.get(`http://localhost:3002/authors/${book.author_id}`)
+              .then(res => {
+                book.author = res.data;
+                return axios.get(`http://localhost:3001/categories/${book.category_id}`); 
+              })
+              .then(res => {
+                book.category = res.data; 
+                return book;
+              });
+          })
+        );
       } else {
         throw new Error('No books found matching the provided query');
       }
@@ -129,6 +100,7 @@ const searchBooks = (query) => {
       throw err;
     });
 };
+
 
 
 

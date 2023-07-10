@@ -28,7 +28,7 @@ const incrementCategoryWeight = (id) => {
   try {
     return Category.increment('weight', { where: { id: id } }); 
   } catch (err) {
-    console.error('Error incrementing category weight:', err);  // Added error handling
+    console.error('Error incrementing category weight:', err);  
   }
 };
 
