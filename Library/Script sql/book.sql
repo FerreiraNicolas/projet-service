@@ -45,10 +45,31 @@ CREATE TABLE IF NOT EXISTS `book` (
 --
 
 INSERT INTO `book` (`title`, `author_id`, `category_id`) VALUES
-('The Hobbit', 1, 1),
-('The Lord of the Rings', 1, 1),
-('The Hunger Games', 2, 2),
-('The Notebook', 3, 3);
+('Harry Potter and the Sorcerer s Stone', 1, 1),
+('The Shining', 2, 2),  
+('The Hunger Games', 3, 3),
+('To Kill a Mockingbird', 4, 4),
+('A Game of Thrones', 5, 5),
+('The Lord of the Rings', 6, 1), 
+('The Great Gatsby', 7, 3),
+('Pride and Prejudice', 8, 4),
+('The Old Man and the Sea', 9, 5),
+('Of Mice and Men', 10, 2),
+('Slaughterhouse-Five', 11, 2),
+('The Handmaid s Tale', 12, 3),
+('Fahrenheit 451', 13, 2),
+('Brave New World', 14, 3),
+('1984', 15, 2),
+('Fight Club', 16, 2),
+('American Gods', 17, 1),
+('Good Omens', 18, 1),
+('The Hitchhiker s Guide to the Galaxy', 19, 1),
+('The Fault in Our Stars', 20, 3),
+('The Bell Jar', 21, 4),
+('The Picture of Dorian Gray', 22, 4), 
+('Fear and Loathing in Las Vegas', 23, 2),
+('Frankenstein', 24, 1),
+('The Raven', 25, 5);
 
 
 --

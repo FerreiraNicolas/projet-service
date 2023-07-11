@@ -41,12 +41,33 @@ CREATE TABLE IF NOT EXISTS `category` (
 -- Déchargement des données de la table `category`
 --
 
-INSERT INTO `category` ( `title`, `weight`) VALUES
-('Fantasy', 0),
-('Adventure', 0),
-('Romance', 0),
+INSERT INTO `category` (`title`, `weight`) VALUES
+('Fantasy', 0),  
+('Horror', 0),
+('Dystopian', 0),
 ('Classics', 0),
-('Drama', 0);
+('Adventure', 0),
+('Mystery', 0),
+('Thriller', 0),
+('Historical Fiction', 0),
+('Science Fiction', 0),
+('Romance', 0),
+('Contemporary', 0),
+('Nonfiction', 0),
+('Poetry', 0),
+('Plays', 0),
+('Short Stories', 0),
+('Memoir', 0),
+('Satire', 0),
+('Bildungsroman', 0),
+('Philosophy', 0),
+('Paranormal', 0),
+('Humor', 0),
+('Travel', 0),
+('Cookbooks', 0),
+('Self Help', 0),
+('History', 0);
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -40,11 +40,33 @@ CREATE TABLE IF NOT EXISTS `author` (
 -- Déchargement des données de la table `author`
 --
 
-INSERT INTO `author` (`name`) VALUES
+INSERT INTO `author` (`name`) VALUES 
 ('J.K. Rowling'),
+('Stephen King'),
+('Suzanne Collins'),
+('Harper Lee'),
+('George R.R. Martin'),
 ('J.R.R. Tolkien'),
+('F. Scott Fitzgerald'),
 ('Jane Austen'),
-('F. Scott Fitzgerald');
+('Ernest Hemingway'),
+('John Steinbeck'),
+('Kurt Vonnegut'),
+('Margaret Atwood'),
+('Ray Bradbury'),
+('Aldous Huxley'),
+('George Orwell'),
+('Chuck Palahniuk'),
+('Neil Gaiman'),
+('Terry Pratchett'),
+('Douglas Adams'),
+('John Green'),
+('Sylvia Plath'),
+('Oscar Wilde'),
+('Hunter S. Thompson'),
+('Mary Shelley'),
+('Edgar Allan Poe');
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
